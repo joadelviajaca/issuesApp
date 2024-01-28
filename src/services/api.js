@@ -17,6 +17,36 @@ export const getAllIssues = async () => {
   }
 };
 
+export const getIssueById = async (id) => {
+    try {
+      const response = await api.get(`/issues/${id}`);
+      return response.data.issue;
+    } catch (error) {
+      console.error(`Error al obtener la incidencia con ID ${id}:`, error);
+      throw error;
+    }
+  };
+
+  export const createIssue = async (issueData) => {
+    try {
+      const response = await api.post('/issues', issueData);
+      return response.data;
+    } catch (error) {
+      console.error('Error al crear la incidencia:', error);
+      throw error;
+    }
+  };
+  
+  export const updateIssue = async (id, issueData) => {
+    try {
+      const response = await api.put(`/issues/${id}`, issueData);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al actualizar la incidencia con ID ${id}:`, error);
+      throw error;
+    }
+}
+
 export const deleteIssue = async (id) => {
   try {
     const response = await api.delete(`/issues/${id}`);
